@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://anabrid.github.io/lucistack/lucistack/abstractions/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Abstractions - LUCIstack</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Abstractions";
+        var mkdocs_page_input_path = "lucistack/abstractions.md";
+        var mkdocs_page_url = "/lucistack/lucistack/abstractions/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> LUCIstack
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+                <ul><li>
+                    <a href="../" style="padding: 0; font-size: inherit; line-height: inherit">
+              <p class="caption"><span class="caption-text">LUCIstack</span></p>
+                    </a>
+                </li></ul>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Abstractions</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#microarchitecture">Microarchitecture</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#problem-space">Problem space</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#service-and-platform">Service and platform</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#why-the-analogy-matters">Why the analogy matters</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">LUCIstack</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item"><a href="../">LUCIstack</a></li>
+      <li class="breadcrumb-item active">Abstractions</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/anabrid/lucistack/edit/master/docs/lucistack/abstractions.md">Edit on anabrid/lucistack</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="abstractions">Abstractions<a class="headerlink" href="#abstractions" title="Permanent link">&para;</a></h1>
+<p>Just like in digital computing, software stacks for hybrid analog computing
+are organised as a sequence of <em>layers of abstraction</em>. A stack — think of
+the OSI network stack as a familiar example — is an ordered set of
+components in which each layer consumes the services of the layer below it
+and exposes a tighter, more problem-oriented interface to the layer above.
+What changes between the two worlds is not the layering pattern, but <em>what</em>
+is being abstracted: in a digital stack each layer hides ever more
+machinery for fetching and executing instructions, whereas in <code>LUCIstack</code>
+each layer hides ever more machinery for configuring and driving an analog
+circuit.</p>
+<p>The illustration from <a href="../../">the index page</a> lists the layers and
+their components for <code>LUCIstack</code>:</p>
+<p><img alt="Software stack with input and interaction formats" src="../../res/stack.drawio.svg" /></p>
+<p>The mapping to a conventional digital stack is close enough to be useful as
+a mental model:</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Digital computing</th>
+<th><code>LUCIstack</code></th>
+<th>Abstraction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microarchitecture</td>
+<td>BIOS / board firmware</td>
+<td><code>hybrid-controller</code></td>
+<td>Expose the analog substrate via a stable, low-level control API; hide circuit-level peculiarities and calibration</td>
+</tr>
+<tr>
+<td>Architecture</td>
+<td>Assembly</td>
+<td><code>pybrid</code> (entity object representation)</td>
+<td>A small, explicit "instruction set" — here a set of configurable elements and switches — manipulated directly by the programmer</td>
+</tr>
+<tr>
+<td></td>
+<td>OS</td>
+<td><code>pybrid</code> (runtime, sessions, proxy)</td>
+<td>Connection management, time-sharing of a device, scheduling and resource management</td>
+</tr>
+<tr>
+<td>Problem space</td>
+<td>Compiler, e.g. <code>gcc</code> / <code>clang</code></td>
+<td><code>redacc</code></td>
+<td>Lowering a high-level, problem-oriented language to the architectural layer through an intermediate representation</td>
+</tr>
+<tr>
+<td></td>
+<td>Algorithms</td>
+<td>Mathematical problems, e.g. ODEs</td>
+<td>The mathematical model of the underlying computation, written in a high-level script or DSL</td>
+</tr>
+<tr>
+<td>Service / platform</td>
+<td>Cloud, batch scheduler</td>
+<td>analog cloud</td>
+<td>Multi-tenant access to a pool of compilers, simulators, and physical devices, accessible over the network</td>
+</tr>
+</tbody>
+</table>
+<p>In the remainder of this page we briefly review each abstraction with
+examples. For deeper detail refer to the documentation of the individual
+components.</p>
+<h2 id="microarchitecture">Microarchitecture<a class="headerlink" href="#microarchitecture" title="Permanent link">&para;</a></h2>
+<p>On the lowest level, every LUCIDAC and REDAC is a combination of digital and
+analog hardware in which the former configures and orchestrates the latter.
+Fundamentally, the machines operate with electrical signals inside a fixed
+voltage range, which the stack normalises to <em>machine units</em> of
+<code>[-1.0, 1.0]</code>. The firmware on the on-board Teensy microcontroller hides the
+peculiarities of the electrical circuitry — component tolerances, the need
+for calibration, settling times — and presents a clean, asynchronous control
+surface to anything above it.</p>
+<p><code>hybrid-controller</code> provides services and routines that guarantee a circuit
+configuration sees a consistent hardware setup with predictable performance:
+ADC/DAC traffic, signal routing, the run-cycle state machine (reset → ic →
+operate → halt), and the front panel. It also abstracts over the <em>physical
+realisation</em> of the machine — for instance, presenting a logical 32×16
+crossbar even when it is implemented as several smaller 8×16 switch
+matrices on the board.</p>
+<p>The role is the analog counterpart of board firmware in a digital system:
+the layer at which an abstract specification first meets physics.</p>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<p>Like a digital CPU, every analog computer has a fixed inventory of
+computational elements — integrators, multipliers, summing junctions,
+coefficient sources — together with configurable interconnect that wires
+them together. A canonical example is connecting two integrators into a
+feedback loop to model exponential decay (see
+<a href="https://the-analog-thing.org/THAT_First_Steps/THAT_First_Steps-v2.pdf">Simulating nuclear decay in <em>THAT, First Steps</em></a>).</p>
+<p>In digital computing the <em>assembly</em> language is the textual surface that
+exposes a CPU's instruction set and registers. Analog computers, however,
+have no step-based execution: time is continuous and there is no program
+counter. The appropriate counterpart is therefore not an instruction stream
+but an <strong>entity-object model</strong> — a programmatic representation of every
+configurable switch, coefficient, and computing element of the machine.</p>
+<p><code>pybrid-computing</code> (<code>pybrid</code> for short) builds this model. A connected
+LUCIDAC or REDAC appears as a tree of Python objects whose properties map
+one-to-one onto the device's configurable items:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># retrieve the entity object model for the LUCIDAC (i.e. &quot;cluster&quot;)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">computer</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">computer</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">carrier</span> <span class="o">=</span> <span class="n">computer</span><span class="o">.</span><span class="n">carriers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">cluster</span> <span class="o">=</span> <span class="n">carrier</span><span class="o">.</span><span class="n">clusters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># set initial conditions for integrators (integrators 0, 1)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">cluster</span><span class="o">.</span><span class="n">m0block</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ic</span> <span class="o">=</span> <span class="mf">0.42</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">cluster</span><span class="o">.</span><span class="n">m0block</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ic</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 0 by default</span>
+</code></pre></div>
+<p>The state of the entity model is serialisable into a compact, protobuf-based
+representation — the <code>.apb</code> <em>module format</em> — which serves as the analog
+equivalent of an object file. The same wire format both stores a
+configuration (along with information about the hardware structure it
+targets) and transports it to the firmware, which materialises it on the
+device. A fragment of the JSON-equivalent view looks like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;entity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/04-E9-E5-18-16-43/0/M0&quot;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">&quot;itorConfig&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">&quot;elements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;ic&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.42</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;k&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">    </span><span class="nt">&quot;k&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">}</span>
+</code></pre></div>
+<p>Beyond the entity model, <code>pybrid</code> also fulfils the role of an <em>operating
+system</em> for the device: it manages transport connections (USB serial, TCP,
+UDP) through a native networking extension, multiplexes access via
+<code>Session</code>-based abstractions so that a single machine can be time-shared
+between callers, and exposes maintenance tasks such as calibration and
+device introspection. Users working at this layer can write fully featured
+analog programs without any knowledge of the underlying electrical
+realisation.</p>
+<h2 id="problem-space">Problem space<a class="headerlink" href="#problem-space" title="Permanent link">&para;</a></h2>
+<p>One of the "native" computations for analog computers is the integration of
+systems of ordinary differential equations (ODEs). At the top of the stack,
+<code>redacc</code> exposes a small scripting language, <code>analang</code>, in which such
+systems — together with their external inputs, outputs and initial
+conditions — are written directly in mathematical form:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>use math;
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>in isin;
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>in icos;
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>probe h(t);
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>probe square;
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>let diff[h, t, t](t) = -h(t);
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>let square = 0.8 * (icos * h(t) - diff[h, t](t) * isin);
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>let h(t: 0) = 1.0;
+</code></pre></div>
+<p><code>analang</code> is more expressive than plain systems of ODEs: it permits
+self-references and recursive definitions</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>let q(t) = a + q(t) * (1.0 - b(t));
+</code></pre></div>
+<p>and therefore covers the full range of computations an analog machine can
+realise. In this sense, <code>analang</code> is <strong>Turing-complete</strong>.</p>
+<p>From <code>analang</code> source, <code>redacc</code> compiles down to an <strong>intermediate
+representation</strong> built as a custom MLIR dialect, <code>analog-IR</code>. The role of
+this IR is directly analogous to
+<a href="https://llvm.org/docs/LangRef.html">LLVM IR</a> in the digital world: it
+gives the compiler a hardware-agnostic, optimisable representation of the
+problem onto which front-ends (ODE notations, SymPy via the <code>pyredacc</code>
+front-end, future graphical editors) and back-ends (LUCIDAC, REDAC, the
+<code>THAT</code> ngspice simulator) attach independently. For the example above the
+lowered IR is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>module {
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  analog.module @harmonic, 1.000000e+04 {
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    %cst   = analog.constant -1.000000e+00
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    %cst_0 = analog.constant -4.200000e-01
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    %cst_1 = analog.constant  0.000000e+00
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    %cst_2 = analog.constant  1.000000e+00
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    %0 = analog.sum %1
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    %1 = analog.mul %cst_2, %3
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    %2 = analog.itor %0, %cst_0, 1.000000e+04
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    %3 = analog.itor %4, %cst_1, 1.000000e+04
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    %4 = analog.sum %5
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    %5 = analog.mul %2, %cst
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    analog.probe 0 = %2 * 1.000000e+00 + 0.000000e+00, &quot;&quot;
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>  }
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>}
+</code></pre></div>
+<p><code>analog-IR</code> already sits a step above the bare architectural layer: it
+describes an abstract analog circuit in terms of a small, fixed set of
+operations (<code>itor</code>, <code>mul</code>, <code>sum</code>, <code>constant</code>, <code>probe</code>, …) without yet
+committing to a concrete machine. Subsequent <code>redacc</code> passes perform
+placement and routing onto a target device and emit the corresponding
+<code>pybrid</code> module — closing the loop back to the architectural layer.</p>
+<h2 id="service-and-platform">Service and platform<a class="headerlink" href="#service-and-platform" title="Permanent link">&para;</a></h2>
+<p>Sitting above the compiler is the "analog cloud" (cli client: <code>analogcli</code>), the cloud-side platform that
+exposes the entire stack as a network service. Users submit <code>analang</code>
+sources or compiled <code>.apb</code> modules through a REST API; the cloud schedules
+the job onto a worker pool (compilation, simulation, or physical
+execution), keeps track of devices and their availability, and returns
+results without the caller ever needing direct access to hardware. Its
+role corresponds to that of a managed compute service or HPC job scheduler
+in the digital world: the same engineering reasons that motivate
+centralised compute platforms — sharing scarce hardware, managing
+authentication and quotas, batching workloads — apply just as much to a
+pool of analog computers.</p>
+<h2 id="why-the-analogy-matters">Why the analogy matters<a class="headerlink" href="#why-the-analogy-matters" title="Permanent link">&para;</a></h2>
+<p>Each interface between layers — REST at the top, a protobuf module format
+in the middle, an asynchronous device protocol at the bottom — is a stable
+contract that lets the layers evolve independently. New front-ends plug
+into <code>redacc</code>; new hardware targets plug in as <code>redacc</code> back-ends;
+alternative runtimes can speak the same firmware protocol. The closeness
+to the digital stack is therefore not merely pedagogical: it is a
+deliberate design choice that lets analog computing inherit decades of
+hard-won lessons about modular system design.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="LUCIstack"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../getting_started/" class="btn btn-neutral float-right" title="Getting Started">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/anabrid/lucistack" class="fa fa-code-fork" style="color: #fcfcfc"> anabrid/lucistack</a>
+        </span>
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../getting_started/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

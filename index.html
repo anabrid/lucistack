@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="anabrid's software stack for hybrid analog-digital computation" /><link rel="canonical" href="https://anabrid.github.io/lucistack/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>LUCIstack</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Home";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/lucistack/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> LUCIstack
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#structure-of-the-stack">Structure of the stack</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#deprecated-components">Deprecated components</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+                <ul><li>
+                    <a href="lucistack/" style="padding: 0; font-size: inherit; line-height: inherit">
+              <p class="caption"><span class="caption-text">LUCIstack</span></p>
+                    </a>
+                </li></ul>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="lucistack/abstractions/">Abstractions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="lucistack/getting_started/">Getting Started</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">LUCIstack</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Home</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/anabrid/lucistack/edit/master/docs/index.md">Edit on anabrid/lucistack</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="lucistack-10">LUCIstack 1.0<a class="headerlink" href="#lucistack-10" title="Permanent link">&para;</a></h1>
+<p>Today's infrastructure for computation is centered on digital computation. For decades, we have gotten used to thinking about computation strictly
+in terms of stored-program computers: Load an instruction from memory, load data from memory, progress the data, store result back into memory.
+Rinse and repeat. Even when accelerator cards -- think of GPUs -- come into play, the same abstraction holds. This abstraction is implemented
+deep into software stacks for today's computing, from the user-facing and library layer, through compilers down to computer's OS' and BIOS.</p>
+<p>Anabrid's hybrid analog computers work differently. For once, they do not have persistent memory and operate with a continuous time scale,
+solving certain problems much more natural than via discrete, digital computing. However, new approaches lead to new abstractions, which in turn
+requires a thorough redesign of the software stack for computation. anabrid's <code>LUCIstack</code> is the result of this overhaul.</p>
+<p><code>LUCIstack</code> is a set of software components that implement abstractions for analog computing computing in the 21st century. Starting from the firmware,
+the stack offers the functionality required for lowering mathematical problems to circuits for analog computing. At present, both anabrid's 
+<a href="https://anabrid.com/lucidac">LUCIDAC</a> and <a href="https://anabrid.com/redac">REDAC</a> devices are supported. The protocols used are open source, hence
+third parties may contribute their own components and modify the stack as desired.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This repository does <strong>not</strong> contain any code. Rather, it documents the general principles behind LUCIstack and forwards
+readers to the individual components and their documentation.</p>
+</div>
+<h2 id="structure-of-the-stack">Structure of the stack<a class="headerlink" href="#structure-of-the-stack" title="Permanent link">&para;</a></h2>
+<p>Like in traditional software stacks for digital computing, the <code>LUCIstack</code> combines multiple components that
+live at different layers of abstractions, each communicating with the layer above and below:</p>
+<p><img alt="Software stack with input and interaction formats" src="res/stack.drawio.svg" /></p>
+<p>The following table lists the individual components of the stack, showing which components
+are currently open resp. closed source and where additional information can be found. Note that
+this might get updated in the future when licenses or components change.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Usage</th>
+<th>Status</th>
+<th>License</th>
+<th>Resources / Docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REDAC computations library</td>
+<td>Library of algorithms and solutions of various problems using analog computers</td>
+<td>Internal use only</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>analogcloud</code></td>
+<td>Cloud access to deployments of the <code>LUCIstack</code>, similar to HPC job scheduling systems</td>
+<td>In production</td>
+<td>Proprietary</td>
+<td><a href="https://anabrid.github.io/analogcloud/">https://anabrid.github.io/analogcloud/</a> and <a href="https://redac.anabrid.com/dev/docs/">https://redac.anabrid.com/dev/docs/</a> (protected)</td>
+</tr>
+<tr>
+<td><code>redacc</code></td>
+<td>Intermediate representation base don MLIR/LLVM for analog computing and compiler lowering systems of ordinary differential equations (ODEs) onto anabrid's devices</td>
+<td>Available for cooperation partners, <code>pyredacc</code> client public</td>
+<td></td>
+<td><a href="https://pypi.org/project/pyredacc/">https://pypi.org/project/pyredacc/</a></td>
+</tr>
+<tr>
+<td><code>pybrid-computing</code></td>
+<td><code>pybrid</code> in short, runtime and "assembler level" for analog computers, interfacing directly with anabrid's devices</td>
+<td>Open Source</td>
+<td>MIT license</td>
+<td><a href="https://github.com/anabrid/pybrid-computing">https://github.com/anabrid/pybrid-computing</a> and <a href="https://anabrid.github.io/pybrid-computing/">https://anabrid.github.io/pybrid-computing/</a></td>
+</tr>
+<tr>
+<td><code>hybrid-controller</code></td>
+<td>Firmware for LUCIDAC/REDAC line of devices</td>
+<td>In production</td>
+<td>Proprietary, binaries available</td>
+<td><a href="https://github.com/anabrid/lucidac-resources">https://github.com/anabrid/lucidac-resources</a></td>
+</tr>
+</tbody>
+</table>
+<p>"Internal use only" in this table refers to projects that have not been made available to third-parties,
+neither publicly nor under an NDA. Please refer to <a href="lucistack/abstractions/">the abstractions guide</a> for more detailed
+information on the components.</p>
+<h2 id="deprecated-components">Deprecated components<a class="headerlink" href="#deprecated-components" title="Permanent link">&para;</a></h2>
+<p>Before the integration of <code>LUCIstack</code>, there was an software stack specifically
+for the LUCIDAC device, fully open sourced. While the development of these components
+has been ceased and the components archived, they still work with current-gen
+LUCIDAC devices and might therefor be useful for people interested in exploring their LUCIDAC
+devices further:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Usage</th>
+<th>Status</th>
+<th>License</th>
+<th>Resources / Docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lucipy</code></td>
+<td>Self-contained runtime and mini-compiler for the LUCIDAC in Python</td>
+<td>Superceded by <code>pybrid</code>, <code>lucipy</code> syntax was integrated into <code>pybrid</code> as optional syntax</td>
+<td>MIT OR GPL-2.0-or-later</td>
+<td><a href="https://github.com/anabrid/lucipy">https://github.com/anabrid/lucipy</a></td>
+</tr>
+<tr>
+<td><code>lucidac-firmware</code></td>
+<td>Open source firmware for the LUCIDAC device</td>
+<td>Superceded by firmware binaries</td>
+<td>MIT OR GPL-2.0-or-later</td>
+<td><a href="https://github.com/anabrid/lucidac-firmware">https://github.com/anabrid/lucidac-firmware</a></td>
+</tr>
+</tbody>
+</table>
+<p>Please note that there is no support by anabrid GmbH for any of these deprecated components!</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="lucistack/" class="btn btn-neutral float-right" title="LUCIstack">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/anabrid/lucistack" class="fa fa-code-fork" style="color: #fcfcfc"> anabrid/lucistack</a>
+        </span>
+    
+    
+    
+      <span><a href="lucistack/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-06-09 14:18:10.052629+00:00
+-->

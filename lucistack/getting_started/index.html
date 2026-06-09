@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://anabrid.github.io/lucistack/lucistack/getting_started/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Getting Started - LUCIstack</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Getting Started";
+        var mkdocs_page_input_path = "lucistack/getting_started.md";
+        var mkdocs_page_url = "/lucistack/lucistack/getting_started/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> LUCIstack
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+                <ul><li>
+                    <a href="../" style="padding: 0; font-size: inherit; line-height: inherit">
+              <p class="caption"><span class="caption-text">LUCIstack</span></p>
+                    </a>
+                </li></ul>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../abstractions/">Abstractions</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Getting Started</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#release-versions-and-public-packages">Release versions and public packages</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pre-release-versions-and-restricted-access-packages">Pre-release versions and restricted-access packages</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#setup-and-authentication">Setup and authentication</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#installing-the-basic-software-stack-and-running-examples">Installing the basic software stack and running examples</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">LUCIstack</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item"><a href="../">LUCIstack</a></li>
+      <li class="breadcrumb-item active">Getting Started</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/anabrid/lucistack/edit/master/docs/lucistack/getting_started.md">Edit on anabrid/lucistack</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="getting-started-with-the-software-stack">Getting started with the software stack<a class="headerlink" href="#getting-started-with-the-software-stack" title="Permanent link">&para;</a></h1>
+<p>For most components of LUCIstack, we provide binary builds for Windows, Linux (x64) and MacOSX (arm64). Before installing
+anabrid's software, make sure that a working install of Python (3.11 - 3.14) is on your machine. We recommend using
+the Python package manager <code>uv</code> -- follow its <a href="https://docs.astral.sh/uv/getting-started/installation/">install guide</a>
+for setting it up on your operating system. Most of anabrid's guide will use <code>uv</code>.</p>
+<h2 id="release-versions-and-public-packages">Release versions and public packages<a class="headerlink" href="#release-versions-and-public-packages" title="Permanent link">&para;</a></h2>
+<p><code>pybrid-computing</code>, <code>pyredacc</code> and <code>analogcli</code> recently been made publicly available (source to come). Both can now be installed simply through PyPi, i.e.,</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pybrid-computing<span class="w"> </span>pyredacc<span class="w"> </span>analogcli
+</code></pre></div>
+<p>Note that this only works with the <em>tagged</em> versions -- versions that our developers deliberately chose to publish. All public packages are now installed
+on yur system - refer to the individual documentations for their actual usage. From time to time, you'll be able to update your packages by adding the <code>-U</code> flag to the <code>install</code> command from above.</p>
+<h2 id="pre-release-versions-and-restricted-access-packages">Pre-release versions and restricted-access packages<a class="headerlink" href="#pre-release-versions-and-restricted-access-packages" title="Permanent link">&para;</a></h2>
+<p>anabrid's internal users and cooperation partners may have access to pre-release/development
+versions of all packages and also to restricted packages, such as the <code>redacc</code> compiler.</p>
+<h3 id="setup-and-authentication">Setup and authentication<a class="headerlink" href="#setup-and-authentication" title="Permanent link">&para;</a></h3>
+<p>In addition to <code>python</code>, you'll needa working <a href="https://docs.docker.com/engine/install/">Docker</a> install. Use system packages
+for Linux and <a href="https://docs.docker.com/desktop/setup/install/windows-install/">Docker Desktop</a>
+for Windows and MacOSX (only for usage of <code>redacc</code>).</p>
+<p>Here are quick tests to run in order to check the availability:
+- <code>uv venv --python 3.13 &amp;&amp; pip install numpy</code>
+- <code>docker run hello-world</code></p>
+<p>Furthermore, you will need an <code>anabrid</code> Gitlab account and set up an API
+token:
+1. Go to <code>User settings</code> (click on your portrait) and move to <code>Personal Access Tokens</code>
+2. Click <code>Add new token</code>
+3. Enter a self-chosen name and select the <code>read_repository</code>, <code>read_virtual_registry</code>, <code>read_registry</code>, <code>read_api</code>.
+permissions.
+4. Note down the generated token.</p>
+<p>In order to automatically retrieve your images, this information should be stored permanently so you
+avoid having to <code>export ...</code> this in each terminal window. In your <code>~/.bashrc</code>, add the following two lines:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CI_REGISTRY_USER</span><span class="o">=</span>&lt;your<span class="w"> </span>gitlab<span class="w"> </span>user<span class="w"> </span>name,<span class="w"> </span>e.g.<span class="w"> </span>thuerck&gt;
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">CI_REGISTRY_PASSWORD</span><span class="o">=</span>&lt;the<span class="w"> </span>token<span class="w"> </span>you<span class="w"> </span>generated<span class="w"> </span>above&gt;
+</code></pre></div>
+<p>Alternatively, you can also add this at runtime, see the examples below.</p>
+<h3 id="installing-the-basic-software-stack-and-running-examples">Installing the basic software stack and running examples<a class="headerlink" href="#installing-the-basic-software-stack-and-running-examples" title="Permanent link">&para;</a></h3>
+<p>We will now install <code>pybrid</code> and <code>redacc</code> (through its <code>pyredacc</code> frontend). While
+internal users may rely on Gitlab, a subset of the applications is also available
+for external users using GitHub.</p>
+<p>First, install <code>pybrid-computing</code> (and its subpackage, <code>pybrid-computing-native</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>uv<span class="w"> </span>venv<span class="w"> </span>--python<span class="w"> </span><span class="m">3</span>.13
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pybrid-computing<span class="w"> </span>--prerelease<span class="o">=</span>allow<span class="w"> </span>--index-url<span class="w"> </span>https://__token__:&lt;TOKEN&gt;@lab.analogparadigm.com/api/v4/projects/pybrid-computing%2Fpybrid-computing/packages/pypi/simple
+</code></pre></div>
+<p>in which you replace <code>&lt;TOKEN&gt;</code> by your personal access token for Gitlab. Once done,
+you can now download and run the examples under <a href="https://lab.analogparadigm.com/pybrid-computing/pybrid-computing/-/tree/fear/port-entity-description/examples/lucipy/stack?ref_type=heads">LUCIDAC examples</a> or use the <code>pybrid</code> CLI via <code>uv run pybrid...</code>.</p>
+<p>Next, we install the compiler's Python interface <code>pyredacc</code> via <code>uv</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>pyredacc<span class="w"> </span>--prerelease<span class="o">=</span>allow<span class="w"> </span>--index-url<span class="w"> </span>https://__token__:&lt;TOKEN&gt;@lab.analogparadigm.com/api/v4/projects/lucidac%2Fsoftware%2Fsoftthat/packages/pypi/simple
+</code></pre></div>
+<p>One possible example is <a href="https://lab.analogparadigm.com/lucidac/software/softthat/-/blob/feat/adapt-pybrid-pyredacc/examples/python/harmonic_sympy_simulate.py?ref_type=heads">the SymPy</a> example which converts an ODE in SymPy, compiles it into a LUCIDAC-applicable format
+and then sets up the simulator to excute the circuit. <code>pyredacc</code> natively bridges
+into <code>pybrid</code> as the example shows.</p>
+<p>Please note that <code>pyredacc</code> internally uses Docker to download images containing
+both the simulator and compiler. This may take a while, depending on the
+internet connection.</p>
+<p><strong>Updating</strong>: From time to time we're releasing new versions. It's  best to update both packages by:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>pybrid-computing<span class="w"> </span>pybrid-computing-native<span class="w"> </span>--prerelease<span class="o">=</span>allow<span class="w"> </span>--index-url<span class="w"> </span>https://__token__:&lt;TOKEN&gt;@lab.analogparadigm.com/api/v4/projects/pybrid-computing%2Fpybrid-computing/packages/pypi/simple
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>pyredacc<span class="w"> </span>--prerelease<span class="o">=</span>allow<span class="w"> </span>--index-url<span class="w"> </span>https://__token__:&lt;TOKEN&gt;@lab.analogparadigm.com/api/v4/projects/lucidac%2Fsoftware%2Fsoftthat/packages/pypi/simple
+</code></pre></div></p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p><strong>I am getting a docker.errors.APIError: 403 Client Error / denied: access forbidden for one of the downloaded images.</strong>
+Unclear. Try manually logging in with you Gitlab username and your token as password:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker login lab.analogparadigm.com:5050
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>docker pull lab.analogparadigm.com:5050/lucidac/software/softthat/redacc-simulator:latest
+</code></pre></div>
+This should download the image - unless your token is not authenticated, then check the permissions described above.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../abstractions/" class="btn btn-neutral float-left" title="Abstractions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/anabrid/lucistack" class="fa fa-code-fork" style="color: #fcfcfc"> anabrid/lucistack</a>
+        </span>
+    
+    
+      <span><a href="../abstractions/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
